@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { UserNavigation, ReviewItem, CustomScrollView } from "../components";
+import { ReviewItem, CustomScrollView } from "../components";
 
 const ReviewsScreen = () => {
   const reviews = [
@@ -67,8 +67,6 @@ const ReviewsScreen = () => {
           />
         ))}
       </CustomScrollView>
-
-      <UserNavigation />
     </View>
   );
 };

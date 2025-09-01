@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import { Header, UserNavigation } from "../components";
+import { Header } from "../components";
 
 const FoodDetailsScreen = () => {
   const [quantity, setQuantity] = useState(0);
@@ -81,8 +81,6 @@ const FoodDetailsScreen = () => {
           <Text style={styles.reviewsText}>Avaliações</Text>
         </TouchableOpacity>
       </View>
-
-      <UserNavigation />
     </SafeAreaView>
   );
 };

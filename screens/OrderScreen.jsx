@@ -8,9 +8,8 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import { Header, UserNavigation } from "./../components";
+import { Header } from "./../components";
 
 const OrderScreen = () => {
   const [quantity, setQuantity] = useState(7);
@@ -84,8 +83,6 @@ const OrderScreen = () => {
       >
         <Text style={styles.checkoutText}>Confirmar pagamento</Text>
       </TouchableOpacity>
-
-      <UserNavigation activeTab={2} />
     </SafeAreaView>
   );
 };

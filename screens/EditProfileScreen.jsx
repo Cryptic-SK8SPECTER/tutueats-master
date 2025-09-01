@@ -13,7 +13,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Octicons from "react-native-vector-icons/Octicons";
 import Feather from "react-native-vector-icons/Feather";
 
-import { UserNavigation, Header } from "../components";
+import { Header } from "../components";
 
 const EditProfileScreen = () => {
   const [formData, setFormData] = useState({
@@ -125,7 +125,6 @@ const EditProfileScreen = () => {
           <Text style={styles.saveButtonText}>Atualizar</Text>
         </TouchableOpacity>
       </View>
-      <UserNavigation activeTab={4} />
     </SafeAreaView>
   );
 };

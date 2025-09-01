@@ -11,12 +11,7 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import {
-  UserNavigation,
-  Header,
-  DiscountBanner,
-  FoodCard,
-} from "../components";
+import { Header, DiscountBanner, FoodCard, SearchBar } from "../components";
 
 // Note: In React Native, you would import icons from react-native-vector-icons
 // For this demo, I'm using simple text representations
@@ -146,32 +141,12 @@ const FoodDeliveryApp = () => {
 
   const HomeScreen = () => (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
+      <Header />
       <ScrollView style={styles.scrollContainer}>
         {/* Header */}
-        <Header />
         <View style={styles.header}>
-          {/* <View style={styles.headerTop}>
-            <View style={styles.locationContainer}>
-              <MapPinIcon />
-              <Text style={styles.locationText}>Rua das Flores, 123</Text>
-            </View>
-            <TouchableOpacity>
-              <BellIcon />
-            </TouchableOpacity>
-          </View> */}
           {/* Search Bar */}
-          <View style={styles.searchContainer}>
-            <FontAwesome5 name="search" style={styles.icon} />
-            <TextInput
-              placeholder="Buscar por restaurante ou prato"
-              style={styles.searchInput}
-              placeholderTextColor="#9CA3AF"
-            />
-            <TouchableOpacity style={styles.filterButton}>
-              <FilterIcon />
-            </TouchableOpacity>
-          </View>
+          <SearchBar />
         </View>
 
         {/* Promotional Banner */}
@@ -411,8 +386,6 @@ const FoodDeliveryApp = () => {
   return (
     <View style={styles.appContainer}>
       {currentScreen === "home" ? <HomeScreen /> : <OrderScreen />}
-      {/* <BottomNavigation /> */}
-      <UserNavigation />
     </View>
   );
 };
@@ -459,22 +432,6 @@ const styles = StyleSheet.create({
   },
 
   // Search Bar Styles
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#F3F4F6",
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  searchInput: {
-    flex: 1,
-    marginLeft: 12,
-    color: "#374151",
-  },
-  filterButton: {
-    marginLeft: 8,
-  },
 
   // Section Styles
   section: {
@@ -866,12 +823,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 10,
     fontWeight: "bold",
-  },
-
-  // Icon Styles (for text representations)
-  icon: {
-    fontSize: 17,
-    color: "#17a2b8",
   },
 });
 

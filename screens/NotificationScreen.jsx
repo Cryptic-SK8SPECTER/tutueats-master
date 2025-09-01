@@ -1,14 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-import {
-  UserNavigation,
-  NotificationItem,
-  CustomScrollView,
-  Header,
-} from "../components";
+import { NotificationItem, CustomScrollView, Header } from "../components";
+import { useNavigation } from "@react-navigation/native";
 
 const NotificationScreen = () => {
+  const navigation = useNavigation();
+  // Função para navegação entre rotas
+  const handleTabPress = (index) => {
+    const routes = ["Home", "Filter", "Order", "Favorite", "Notifications"];
+    navigation.navigate(routes[index]);
+  };
   const notifications = [
     {
       id: 1,
@@ -130,7 +132,6 @@ const NotificationScreen = () => {
       </CustomScrollView>
 
       {/* Bottom Tab Bar */}
-      <UserNavigation activeTab={4} />
     </View>
   );
 };

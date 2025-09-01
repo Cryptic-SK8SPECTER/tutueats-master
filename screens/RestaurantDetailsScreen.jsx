@@ -14,7 +14,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { BackButton, Header, UserNavigation } from "../components";
+import { BackButton, Header } from "../components";
 
 const { width } = Dimensions.get("window");
 
@@ -308,7 +308,6 @@ export default function RestaurantDetailsScreen() {
           </View>
         </View>
       </ScrollView>
-      <UserNavigation />
     </SafeAreaView>
   );
 }

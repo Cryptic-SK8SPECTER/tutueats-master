@@ -10,3 +10,4 @@ export { default as ReviewItem } from "./ReviewItem";
 export { default as CustomScrollView } from "./CustomScrollView";
 export { default as NotificationIcon } from "./NotificationIcon";
 export { default as NotificationItem } from "./NotificationItem";
+export { default as SearchBar } from "./SearchBar";

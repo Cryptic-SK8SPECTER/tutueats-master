@@ -8,7 +8,6 @@ import {
   Image,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { UserNavigation } from "../components";
 
 const { width, height } = Dimensions.get("window");
 
@@ -63,7 +62,6 @@ const FavoriteScreen = () => {
       </View>
 
       {/* Bottom Navigation */}
-      <UserNavigation activeTab={3} />
     </SafeAreaView>
   );
 };

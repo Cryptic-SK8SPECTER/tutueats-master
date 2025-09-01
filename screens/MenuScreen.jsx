@@ -9,7 +9,6 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
-import { UserNavigation } from "../components";
 
 const MenuScreen = () => {
   const menuItems = [
@@ -174,7 +173,6 @@ const MenuScreen = () => {
           </View>
         ))}
       </ScrollView>
-      <UserNavigation activeTab={1} />
     </SafeAreaView>
   );
 };
