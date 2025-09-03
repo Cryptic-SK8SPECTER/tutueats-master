@@ -7,19 +7,28 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  Platform,
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ProfileSidebar from "./ProfileSidebar";
 
-const Header = ({ userName = "Alberto Dgegde", cartTotal = "1192 MZN" }) => {
+const Header = ({ userName = "Alberto Dgegde" }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const total = 100;
+
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      {/* Configura StatusBar */}
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="white"
+        translucent={false} // importante
+      />
+
+      {/* SafeAreaView ajusta automaticamente altura para hora/entortamento */}
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.headerContainer}>
-          {/* User Profile Section */}
+          {/* User Profile */}
           <TouchableOpacity
             style={styles.userSection}
             onPress={() => setShowSidebar(true)}
@@ -34,12 +43,11 @@ const Header = ({ userName = "Alberto Dgegde", cartTotal = "1192 MZN" }) => {
             <Text style={styles.userName}>{userName}</Text>
           </TouchableOpacity>
 
-          {/* Cart Section */}
-
+          {/* Cart */}
           <View style={styles.totalBadge}>
             <Text style={styles.totalBadgeText}>{total.toFixed(2)} MZN</Text>
             <View style={styles.cartContainer}>
-              <FontAwesome5 name="shopping-bag" size={20} color="#fffd" />
+              <FontAwesome5 name="shopping-bag" size={20} color="#fff" />
               <View style={styles.quantityBadge}>
                 <Text style={styles.quantityText}>0</Text>
               </View>
@@ -47,6 +55,7 @@ const Header = ({ userName = "Alberto Dgegde", cartTotal = "1192 MZN" }) => {
           </View>
         </View>
       </SafeAreaView>
+
       <ProfileSidebar
         isVisible={showSidebar}
         onClose={() => setShowSidebar(false)}
@@ -57,25 +66,9 @@ const Header = ({ userName = "Alberto Dgegde", cartTotal = "1192 MZN" }) => {
 };
 
 const styles = StyleSheet.create({
-  totalBadge: {
-    backgroundColor: "#00BCD4",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  totalBadgeText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
-    marginRight: 5,
-  },
-  cartIcon: {
-    fontSize: 16,
-  },
   safeArea: {
     backgroundColor: "white",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   headerContainer: {
     flexDirection: "row",
@@ -100,40 +93,22 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#777",
   },
-  cartSection: {
+  totalBadge: {
+    backgroundColor: "#00BCD4",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-  },
-  cartTotal: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#06B6D4",
-  },
-  cartButton: {
-    backgroundColor: "#06B6D4",
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
   },
   totalBadgeText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+    marginRight: 5,
   },
   cartContainer: {
     position: "relative",
-    marginLeft: 10,
   },
   quantityBadge: {
     position: "absolute",

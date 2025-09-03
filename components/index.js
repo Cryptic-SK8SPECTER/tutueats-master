@@ -11,3 +11,4 @@ export { default as CustomScrollView } from "./CustomScrollView";
 export { default as NotificationIcon } from "./NotificationIcon";
 export { default as NotificationItem } from "./NotificationItem";
 export { default as SearchBar } from "./SearchBar";
+export { default as MenuItem } from "./MenuItem";

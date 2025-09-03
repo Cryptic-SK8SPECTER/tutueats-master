@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Header } from "../components";
 
 const { width, height } = Dimensions.get("window");
 
@@ -15,26 +16,7 @@ const FavoriteScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.avatarContainer}>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>👨</Text>
-          </View>
-        </View>
-
-        <Text style={styles.headerTitle}>Favorite</Text>
-
-        <View style={styles.priceContainer}>
-          <Text style={styles.priceText}>$155.90</Text>
-          <MaterialIcons
-            name="shopping-cart"
-            size={20}
-            color="#fff"
-            style={styles.cartIcon}
-          />
-        </View>
-      </View>
-
+      <Header />
       {/* Main Content */}
       <View style={styles.mainContent}>
         {/* Phone with Heart Animation */}

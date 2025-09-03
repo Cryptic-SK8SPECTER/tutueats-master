@@ -1,463 +1,183 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
   TextInput,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
   Image,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
+import { Header, SearchBar, MenuItem } from "../components";
 
-const MenuScreen = () => {
-  const menuItems = [
-    {
-      id: 1,
-      name: "Creamy Chicken Alfredo",
-      description:
-        "Combining yogurt with herbs, garlic, lemon juice, and spices can create a tangy and light dressing option.",
-      calories: "110 kcal - 200g",
-      price: "$13.49",
-      image: {
-        uri: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=80&h=80&fit=crop",
-      },
-      isNew: true,
-      isSpicy: false,
-    },
-    {
-      id: 2,
-      name: "Pan-Seared Salmon",
-      description:
-        "Combining yogurt with herbs, garlic, lemon juice, and spices can create a tangy and light dressing option.",
-      calories: "110 kcal - 200g",
-      price: "$15.99",
-      image: {
-        uri: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=80&h=80&fit=crop",
-      },
-      isNew: false,
-      isSpicy: false,
-    },
-    {
-      id: 3,
-      name: "Pan-Seared Duck",
-      description:
-        "Combining yogurt with herbs, garlic, lemon juice, and spices can create a tangy and light dressing option.",
-      calories: "110 kcal - 200g",
-      price: "$18.99",
-      image: {
-        uri: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=80&h=80&fit=crop",
-      },
-      isNew: false,
-      isSpicy: true,
-    },
-  ];
+const categories = ["Salads", "Meat", "Pasta", "Soups", "Hot Meals", "Fish"];
 
-  const categories = ["Salads", "Meat", "Pasta", "Soups", "Hot Meals", "Fish"];
+const menuItems = [
+  {
+    id: 1,
+    name: "Beef Stroganoff",
+    description:
+      "Combining yogurt with herbs, garlic, lemon juice, and spices can create a tangy and light dressing option.",
+    calories: "110 kcal - 200g",
+    price: "1499 MZN",
+    image:
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=80&h=80&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Caesar Salad",
+    description: "Fresh lettuce with chicken, croutons, and parmesan cheese.",
+    calories: "120 kcal - 180g",
+    price: "1299 MZN",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 3,
+    name: "Grilled Salmon",
+    description: "Succulent salmon fillet with a lemon herb sauce.",
+    calories: "150 kcal - 250g",
+    price: "1899 MZN",
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 4,
+    name: "Vegetarian Pasta",
+    description: "Pasta with seasonal vegetables and olive oil dressing.",
+    calories: "130 kcal - 220g",
+    price: "1349 MZN",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 5,
+    name: "Chicken Parmesan",
+    description: "Breaded chicken with marinara sauce and melted cheese.",
+    calories: "200 kcal - 300g",
+    price: "1699 MZN",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=80&q=80",
+  },
+  {
+    id: 6,
+    name: "Mushroom Risotto",
+    description: "Creamy risotto with wild mushrooms and parmesan.",
+    calories: "140 kcal - 200g",
+    price: "1549 MZN",
+    image:
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=80&q=80",
+  },
+];
+
+export default function MenuScreen() {
+  const renderItem = ({ item }) => <MenuItem item={item} />;
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Pasta");
+  const [cartTotal, setCartTotal] = useState(156.9);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
-          <Text style={styles.backArrow}>‹</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Menu</Text>
-        <View style={styles.headerRight}>
-          <View style={styles.cartContainer}>
-            <View style={styles.cartBadge}>
-              <Text style={styles.cartBadgeText}>2</Text>
-            </View>
-            <TouchableOpacity style={styles.cartButton}>
-              <View style={styles.cartIconContainer}>
-                <Text style={styles.cartIcon}>🛒</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+    <>
+      <Header />
 
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <View style={styles.searchIconContainer}>
-            <Text style={styles.searchIcon}>🔍</Text>
-          </View>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Pesquisar ..."
-            placeholderTextColor="#a0a0a0"
-          />
+      <SafeAreaView style={styles.container}>
+        {/* Header */}
+        {/* Search */}
+        <View style={styles.searchContainer}>
+          <SearchBar />
         </View>
-        <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterIcon}>☰</Text>
-        </TouchableOpacity>
-      </View>
 
-      {/* Category Tabs */}
-      <View style={styles.categoryWrapper}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.categoryContainer}
-          contentContainerStyle={styles.categoryContentContainer}
-        >
-          {categories.map((category, index) => (
+        {/* Categories */}
+        <View style={styles.categoriesContainer}>
+          {categories.map((cat) => (
             <TouchableOpacity
-              key={index}
+              key={cat}
               style={[
-                styles.categoryTab,
-                category === "Meat" && styles.activeCategoryTab,
+                styles.categoryButton,
+                selectedCategory === cat && styles.categoryButtonActive,
               ]}
+              onPress={() => setSelectedCategory(cat)}
             >
               <Text
                 style={[
                   styles.categoryText,
-                  category === "Meat" && styles.activeCategoryText,
+                  selectedCategory === cat && styles.categoryTextActive,
                 ]}
               >
-                {category}
+                {cat}
               </Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
-      </View>
+        </View>
 
-      {/* Menu Items */}
-      <ScrollView
-        style={styles.menuContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        {menuItems.map((item) => (
-          <View key={item.id} style={styles.menuItem}>
-            <View style={styles.menuItemLeft}>
-              <View style={styles.menuItemImageContainer}>
-                <Image
-                  source={item.image}
-                  style={styles.itemImage}
-                  defaultSource={{
-                    uri: "https://via.placeholder.com/70x70/cccccc/ffffff?text=Food",
-                  }}
-                />
-                {item.isNew && (
-                  <View style={styles.newBadge}>
-                    <Text style={styles.newBadgeText}>NEW</Text>
-                  </View>
-                )}
-                {item.isSpicy && (
-                  <View style={styles.spicyBadge}>
-                    <Text style={styles.spicyIcon}>🌶️</Text>
-                  </View>
-                )}
-              </View>
-            </View>
-
-            <View style={styles.menuItemRight}>
-              <View style={styles.menuItemHeader}>
-                <Text style={styles.menuItemName}>{item.name}</Text>
-                <TouchableOpacity style={styles.favoriteButton}>
-                  <Text style={styles.favoriteIcon}>♡</Text>
-                </TouchableOpacity>
-              </View>
-
-              <Text style={styles.menuItemDescription}>{item.description}</Text>
-              <Text style={styles.menuItemCalories}>{item.calories}</Text>
-
-              <View style={styles.menuItemFooter}>
-                <Text style={styles.menuItemPrice}>{item.price}</Text>
-                <TouchableOpacity style={styles.addButton}>
-                  <Text style={styles.addButtonText}>+</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+        {/* Menu Items */}
+        <FlatList
+          data={menuItems.filter((item) =>
+            item.name.toLowerCase().includes(search.toLowerCase())
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+      </SafeAreaView>
+    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: "#fff",
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  backArrow: {
-    fontSize: 28,
-    color: "#333",
-    fontWeight: "300",
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#333",
-    flex: 1,
-    textAlign: "center",
-    marginRight: 40, // Balance the back button
-  },
-  headerRight: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#f9fafb",
+    paddingHorizontal: 16,
   },
   cartContainer: {
-    position: "relative",
-  },
-  cartBadge: {
-    position: "absolute",
-    top: -8,
-    right: -8,
-    backgroundColor: "#00bcd4",
-    borderRadius: 12,
-    width: 24,
-    height: 24,
-    justifyContent: "center",
+    flexDirection: "row",
     alignItems: "center",
-    zIndex: 1,
-  },
-  cartBadgeText: {
-    color: "#fff",
-    fontSize: 13,
-    fontWeight: "bold",
-  },
-  cartButton: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  cartIconContainer: {
-    backgroundColor: "#f5f5f5",
+    gap: 8,
+    backgroundColor: "#06B6D4",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     borderRadius: 20,
-    width: 36,
-    height: 36,
-    justifyContent: "center",
-    alignItems: "center",
   },
-  cartIcon: {
-    fontSize: 18,
+  cartTotal: {
+    color: "#fff",
+    fontWeight: "600",
+    marginRight: 4,
   },
   searchContainer: {
     flexDirection: "row",
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: "#fff",
     alignItems: "center",
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    marginVertical: 12,
+    gap: 8,
   },
-  searchBar: {
-    flex: 1,
+  categoriesContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 25,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    marginRight: 10,
+    marginBottom: 12,
+    gap: 8,
   },
-  searchIconContainer: {
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 10,
-  },
-  searchIcon: {
-    fontSize: 16,
-    color: "#a0a0a0",
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#333",
-    paddingVertical: 0,
-  },
-  filterButton: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 25,
-    width: 48,
-    height: 48,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  filterIcon: {
-    fontSize: 18,
-    color: "#666",
-  },
-  categoryWrapper: {
+  categoryButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     backgroundColor: "#fff",
-    paddingBottom: 20,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
-  categoryContainer: {
-    paddingHorizontal: 20,
-  },
-  categoryContentContainer: {
-    alignItems: "center",
-  },
-  categoryTab: {
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    marginRight: 12,
-    borderRadius: 25,
-    backgroundColor: "#f5f5f5",
-    minWidth: 80,
-    alignItems: "center",
-  },
-  activeCategoryTab: {
-    backgroundColor: "#00bcd4",
+  categoryButtonActive: {
+    backgroundColor: "#fff",
+    borderColor: "#06B6D4",
   },
   categoryText: {
-    fontSize: 15,
-    color: "#666",
-    fontWeight: "500",
-  },
-  activeCategoryText: {
-    color: "#fff",
-    fontWeight: "600",
-  },
-  menuContainer: {
-    flex: 1,
-    paddingTop: 10,
-  },
-  menuItem: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    marginHorizontal: 20,
-    marginBottom: 15,
-    borderRadius: 15,
-    padding: 15,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  menuItemLeft: {
-    marginRight: 15,
-  },
-  menuItemImageContainer: {
-    position: "relative",
-    width: 80,
-    height: 80,
-  },
-  itemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 45,
-  },
-  newBadge: {
-    position: "absolute",
-    top: -8,
-    left: -8,
-    backgroundColor: "#ff4757",
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
-  newBadgeText: {
-    color: "#fff",
-    fontSize: 10,
-    fontWeight: "bold",
-  },
-  spicyBadge: {
-    position: "absolute",
-    bottom: -8,
-    left: -8,
-    backgroundColor: "#fff",
-    borderRadius: 15,
-    width: 30,
-    height: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  spicyIcon: {
     fontSize: 14,
+    color: "#6b7280",
   },
-  menuItemRight: {
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  menuItemHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 2,
-  },
-  menuItemName: {
-    fontSize: 17,
+  categoryTextActive: {
+    color: "#06B6D4",
     fontWeight: "600",
-    color: "#333",
-    flex: 1,
-    marginRight: 10,
-  },
-  favoriteButton: {
-    padding: 5,
-  },
-  favoriteIcon: {
-    fontSize: 22,
-    color: "#ddd",
-  },
-  menuItemDescription: {
-    fontSize: 14,
-    color: "#666",
-    lineHeight: 20,
-    marginBottom: 8,
-  },
-  menuItemCalories: {
-    fontSize: 12,
-    color: "#999",
-    marginBottom: 12,
-  },
-  menuItemFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  menuItemPrice: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#333",
-  },
-  addButton: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 20,
-    width: 36,
-    height: 36,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  addButtonText: {
-    fontSize: 22,
-    fontWeight: "300",
-    color: "#666",
   },
 });
-
-export default MenuScreen;
